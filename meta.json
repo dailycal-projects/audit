@@ -1,0 +1,35 @@
+{
+  "id": "41180754178",
+  "publishPath": "2020/voting/",
+  "stagingUrl": "http://stage-projects.dailycal.org/2020/voting/index.html",
+  "url": "http://projects.dailycal.org/2020/voting/",
+  "timestamp": "2020-10-25T08:13-0400",
+  "dateline": "10/25/20 08:13 PM EDT",
+  "header": {
+    "headline": "Who votes at UC Berkeley?",
+    "subhed": "Comparing voting rates",
+    "byline": "Alex Zhao",
+    "byline_link": "https://www.dailycal.org/author/alexzhao"
+  },
+  "share": {
+    "fbook": {
+      "card_title": "Who votes at UC Berkeley?",
+      "card_description": "Comparing voting rates",
+      "author": "dailycal"
+    },
+    "twitter": {
+      "card_title": "Who votes at UC Berkeley?",
+      "card_description": "Comparing voting rates",
+      "share_tweet": "Comparing voting rates",
+      "author": "@dailycal"
+    },
+    "image": {
+      "url": "http://projects.dailycal.org/2020/voting/images/voted.JPG",
+      "alt": "<Text>",
+      "type": "image/jpeg",
+      "width": "600",
+      "height": "300"
+    },
+    "keywords": "Daily Cal, news"
+  }
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<div id="sg1">
+  <h3 id="heads"></h3>
+  <div>
+    <select class="sel" id="selStatus" onchange="changeStream()">
+      <option value = "all">All Students</option>
+      <option value = "fr">New Freshmen</option>
+      <option value = "tr">Transfer Students</option>
+    </select>
+    <select class="sel" id="selType" onchange="changeStream()">
+      <option value = "pp">Applicants</option>
+      <option value = "dm">Admitted Students</option>
+    </select>
+  </div>
+</div>
+<script>
+
+// set the dimensions and margins of the graph
+
+var margin = {top: 155, right: pageWidth / 4, bottom: 30, left: pageWidth / 4},
+    width = pageWidth - margin.left - margin.right,
+    height = 555 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#sg1")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+changeStream();
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function addHeading() {
+  let phrase = "";
+  if (selType.value === "pp") {
+    switch(selStatus.value) {
+      case "all":
+        phrase = "Student Applicants";
+        break;
+      case "fr":
+        phrase = "Freshman Applicants";
+        break;
+      case "tr":
+        phrase = "Transfer Applicants";
+        break;
+    }
+  } else {
+    switch(selStatus.value) {
+      case "all":
+        phrase = "Admitted Students";
+        break;
+      case "fr":
+        phrase = "Admitted Freshman";
+        break;
+      case "tr":
+        phrase = "Admitted Transfer Students";
+        break;
+    }
+  }
+
+  heads.innerHTML = "Number of " + phrase + " Per Academic Year, by College";
+}
+
+function addData() {
+  svg.selectAll("*").remove();
+// Parse the Data
+  d3.csv("https://raw.githubusercontent.com/vyoma-raman/my_dc_first_repo/master/data/a" + selType.value + "_" + selStatus.value + "_clg.csv", function(data) {
+
+    // List of groups = header of the csv files
+    var keys = data.columns.slice(1)
+
+    // Strings corresponding to keys
+    var keyDict = {"Chemistry": "College of Chemistry", "Engineering": "College of Engineering", "EnvironmentalDesign": "College of Environmental Design", "NaturalResources": "College of Natural Resources", "LettersScience": "College of Letters and Sciences", "Haas": "Haas School of Business", "Optometry": "School of Optometry"}
+
+    // Add X axis
+    var x = d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return d.Year; }))
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x)
+        .tickValues([1998, 2003, 2008, 2013, 2018])
+        .tickFormat(function(d, i) {
+          return d + "-" + (d + 1);
+        }));
+
+    // Add Y axis
+    var scale = d3.max(data, function(d) { return d3.sum([d.Chemistry, d.Engineering, d.NaturalResources, d.LettersScience, d.EnvironmentalDesign, d.Haas, d.Optometry]); }) / 2 + 500
+    var y = d3.scaleLinear()
+      .domain([-scale, scale])
+      .range([ height, 0 ]);
+
+    var colorRange1 = ['#5A3B48','#FFCAB1','#095c4d','#575A4B','#93B7BE','#AD6A6C','#C8E4D3'],
+      colorRange2 = ['#5A3B48','#FFCAB1','#095c4d','#93B7BE','#AD6A6C'];
+
+    // color palette
+    var color = d3.scaleOrdinal()
+      .domain(keys)
+      .range(keys.length == 7 ? colorRange1 : colorRange2)
+
+    //stack the data?
+    var stackedData = d3.stack()
+      .offset(d3.stackOffsetSilhouette)
+      .keys(keys)
+      (data)
+
+    // create areas
+    var areas = d3.area()
+          .x(function(d, i) { return x(d.data.Year); })
+          .y0(function(d) { return y(d[0]); })
+          .y1(function(d) { return y(d[1]); })
+          .curve(d3.curveBasis);
+
+    // create tooltip
+    var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip");
+
+    // Show the areas
+    svg
+      .selectAll("mylayers")
+      .data(stackedData)
+      .enter()
+      .append("path")
+        .style("fill", function(d) { return color(d.key); })
+        .attr("d", areas)
+      .on("mouseover", function(d, i) {
+        d3.select(this)
+          .style("opacity", 0.7)
+        tooltip.transition()
+          .style("opacity", 1)
+      })
+      .on("mouseout", function(d) {
+        d3.select(this)
+          .style("opacity", 1)
+        tooltip.transition()
+          .style("opacity", 0)
+      })
+      .on("mousemove", function(d, i, j) {
+        let year = Math.floor(x.invert(d3.mouse(this)[0]));
+        let verb = (selType.value === "pp") ? "received" : "admitted";
+        // applicants; freshman applicants; transfer applicants // students; freshmen; transfer students
+        let end = "";
+        if (selType.value === "pp") {
+          switch(selStatus.value){
+            case "all":
+              end = "applicants.";
+              break;
+            case "fr":
+              end = "freshman applicants.";
+              break;
+            case "tr":
+              end = "transfer applicants";
+              break;
+          }
+        } else {
+          switch(selStatus.value) {
+            case "all":
+              end = "students.";
+              break;
+            case "fr":
+              end = "freshmen.";
+              break;
+            case "tr":
+              end = "transfer students";
+              break;
+          }
+        }
+        let x_coord = d3.event.pageX;
+        tooltip.html("<strong>" + year + "-" + (year + 1) + "</strong><br>The " + keyDict[keys[i]] + " " + verb + " " + numberWithCommas(d[year - 1996]['data'][keys[i]]) + " " + end)
+          .style("left", ((x_coord <= (pageWidth / 4 + 125)) ? (pageWidth / 4) : ((x_coord >= (pageWidth * 3 / 4 - 125)) ? (pageWidth * 3 / 4 - 250) : (x_coord - 125))) + "px")
+          .style("top", (margin.top - 55) + "px")
+          .style("width", "250px")
+      })
+  })
+}
+
+function changeStream() {
+  addHeading();
+  addData();
+}
+
+</script>

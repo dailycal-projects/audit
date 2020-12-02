@@ -1,0 +1,36 @@
+//Custom css
+.sel {
+  position: relative;
+  font-family: Arial;
+  background-color: #D0ADA7;
+  left: 25%;
+  height: 30px;
+  top: 50px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 15px;
+}
+
+#heads {
+  position: absolute;
+  left: 25%;
+  font-family: Arial;
+}
+
+.tooltip {
+  position: absolute;
+  background: white;
+  padding: 5px;
+  border: 1px gray solid;
+  border-radius: 10px;
+  opacity: 0;
+  font-family: Arial;
+}
+
+g {
+  font-size: 15px;
+}
+
+.select-items div,.select-selected {
+  border-radius: 15px;
+}
