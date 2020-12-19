@@ -19,7 +19,7 @@
 let pageWidth = window.innerWidth;
 
 var margin = {top: 155, right: pageWidth / 4, bottom: 30, left: pageWidth / 4},
-    width = pageWidth - margin.left - margin.right,
+    width_sg = pageWidth - margin.left - margin.right,
     height = 555 - margin.top - margin.bottom;
 
 function numberWithCommas(x) {
@@ -29,7 +29,7 @@ function numberWithCommas(x) {
 // append the svg3 object to the body of the page
 var svg3 = d3.select("#sg2")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", width_sg + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
@@ -64,13 +64,13 @@ function addData() {
     // List of groups = header of the csv files
     var keys = data.columns.slice(1)
 
-    // Add X axis
-    var x = d3.scaleLinear()
+    // Add x_stream ax_streamis
+    var x_stream = d3.scaleLinear()
       .domain(d3.extent(data, function(d) { return d.Year; }))
-      .range([ 0, width ]);
+      .range([ 0, width_sg ]);
     svg3.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x)
+      .call(d3.axisBottom(x_stream)
         .tickValues([1998, 2003, 2008, 2013, 2018])
         .tickFormat(function(d, i) {
           return d + "-" + (d + 1);
@@ -95,7 +95,7 @@ function addData() {
 
     // create areas
     var areas = d3.area()
-          .x(function(d, i) { return x(d.data.Year); })
+          .x(function(d, i) { return x_stream(d.data.Year); })
           .y0(function(d) { return y(d[0]); })
           .y1(function(d) { return y(d[1]); })
           .curve(d3.curveBasis);
@@ -130,7 +130,7 @@ function addData() {
           .style("opacity", 0)
       })
       .on("mousemove", function(d, i, j) {
-        let year = Math.floor(x.invert(d3.mouse(this)[0]));
+        let year = Math.floor(x_stream.invert(d3.mouse(this)[0]));
         let x_coord = d3.event.pageX;
         let noun = ""
         switch(selStatus.value) {
@@ -157,7 +157,7 @@ function addData() {
         .attr("stroke", "#FFCAB1")
         .attr("stroke-width", 3)
         .attr("d", d3.line()
-          .x(function(d) { return x(d.Year) })
+          .x(function(d) { return x_stream(d.Year) })
           .y(function(d) { return y(d.AcceptanceRate * scale / 20 - scale) })
         )
 
@@ -167,7 +167,7 @@ function addData() {
       .append("circle")
         .attr("fill", "#ffb998")
         .attr("stroke", "none")
-        .attr("cx", function(d) { return x(d.Year) })
+        .attr("cx", function(d) { return x_stream(d.Year) })
         .attr("cy", function(d) { return y(d.AcceptanceRate * scale / 20 - scale) })
         .attr("r", 3.5)
       .on("mouseover", function(d, i) {
@@ -185,7 +185,7 @@ function addData() {
       .on("click", function(d, i, j) {
         tooltip2.transition()
           .style("opacity", 0.6)
-        let year = Math.floor(x.invert(d3.mouse(this)[0]));
+        let year = Math.floor(x_stream.invert(d3.mouse(this)[0]));
         let y_coord = d3.event.pageY;
         let noun = "";
         switch(selStatus.value) {
