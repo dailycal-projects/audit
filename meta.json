@@ -1,19 +1,19 @@
 {
   "id": "41180754178",
-  "publishPath": "2020/voting/",
-  "stagingUrl": "http://stage-projects.dailycal.org/2020/voting/index.html",
-  "url": "http://projects.dailycal.org/2020/voting/",
+  "publishPath": "2020/audit/",
+  "stagingUrl": "http://stage-projects.dailycal.org/2020/audit/index.html",
+  "url": "http://projects.dailycal.org/2020/audit/",
   "timestamp": "2020-10-25T08:13-0400",
   "dateline": "10/25/20 08:13 PM EDT",
   "header": {
-    "headline": "Who votes at UC Berkeley?",
-    "subhed": "Comparing voting rates",
-    "byline": "Alex Zhao",
-    "byline_link": "https://www.dailycal.org/author/alexzhao"
+    "headline": "Audit explanation",
+    "subhed": "Admissions and applications",
+    "byline": "Vyoma Raman, Kaylei Nilson-Pierce, Yasmin Gehman",
+    "byline_link": "https://www.dailycal.org/author/vraman"
   },
   "share": {
     "fbook": {
-      "card_title": "Who votes at UC Berkeley?",
+      "card_title": "Audit",
       "card_description": "Comparing voting rates",
       "author": "dailycal"
     },
