@@ -23,13 +23,13 @@
 selStatus.value = "all"
 
 var margin = {top: 155, right: pageWidth / 4, bottom: 30, left: pageWidth / 4},
-    width = pageWidth - margin.left - margin.right,
-    height = 555 - margin.top - margin.bottom;
+    width_sg2 = pageWidth - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
-var svg = d3.select("#sg1")
+// append the svg4 object to the body of the page
+var svg4 = d3.select("#sg1")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", width_sg2 + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
@@ -73,7 +73,7 @@ function addHeading() {
 }
 
 function addData() {
-  svg.selectAll("*").remove();
+  svg4.selectAll("*").remove();
 // Parse the Data
   d3.csv("https://raw.githubusercontent.com/vyoma-raman/my_dc_first_repo/master/data/a" + selType.value + "_" + selStatus.value + "_clg.csv", function(data) {
 
@@ -86,8 +86,8 @@ function addData() {
     // Add X axis
     var x = d3.scaleLinear()
       .domain(d3.extent(data, function(d) { return d.Year; }))
-      .range([ 0, width ]);
-    svg.append("g")
+      .range([ 0, width_sg2 ]);
+    svg4.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x)
         .tickValues([1998, 2003, 2008, 2013, 2018])
@@ -127,7 +127,7 @@ function addData() {
       .attr("class", "tooltip");
 
     // Show the areas
-    svg
+    svg4
       .selectAll("mylayers")
       .data(stackedData)
       .enter()
