@@ -5,17 +5,17 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="my_dataviz2"></div>
 
 <script>
 
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 70, left: 60},
+var margin = {top: 30, right: 30, bottom: 80, left: 60},
     width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#my_dataviz2")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -32,7 +32,7 @@ var x = d3.scaleBand()
   .domain(data.map(function(d) { return d.school; }))
   .padding(0.2);
 svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
+  .attr("transform", "translate(0," + (height) + ")")
   .call(d3.axisBottom(x))
   .selectAll("text")
     .attr("transform", "translate(-10,0)rotate(-45)")
@@ -66,8 +66,9 @@ svg.selectAll("mybar")
       .style("opacity", 1)
     tooltip.html("<strong>" + d.school + "</strong><br>" + d.value + " students")
       .style("left", (d3.event.pageX) + "px")
-      .style("top", (margin.top) + "px")
+      .style("top", (d3.event.pageY) + "px")
       .style("width", "auto")
+      .style("height", "70px")
       .style("font-size", "12px")
   })
   .on("mouseout", function(d, i) {

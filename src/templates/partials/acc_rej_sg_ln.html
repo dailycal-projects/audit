@@ -26,8 +26,8 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// append the svg object to the body of the page
-var svg = d3.select("#sg2")
+// append the svg3 object to the body of the page
+var svg3 = d3.select("#sg2")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -36,7 +36,7 @@ var svg = d3.select("#sg2")
           "translate(" + margin.left + "," + margin.top + ")");
 
 function changeStream() {
-  svg.selectAll("*").remove();
+  svg3.selectAll("*").remove();
   addHeading();
   addData();
 }
@@ -68,7 +68,7 @@ function addData() {
     var x = d3.scaleLinear()
       .domain(d3.extent(data, function(d) { return d.Year; }))
       .range([ 0, width ]);
-    svg.append("g")
+    svg3.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x)
         .tickValues([1998, 2003, 2008, 2013, 2018])
@@ -110,7 +110,7 @@ function addData() {
       .attr("class", "tooltip");
 
     // Show the areas
-    svg
+    svg3
       .selectAll("mylayers")
       .data(stackedData)
       .enter()
@@ -150,7 +150,7 @@ function addData() {
 
       })
 
-      svg
+      svg3
         .append("path")
         .datum(data)
         .attr("fill", "none")
@@ -161,7 +161,7 @@ function addData() {
           .y(function(d) { return y(d.AcceptanceRate * scale / 20 - scale) })
         )
 
-      svg.selectAll("myCircles")
+      svg3.selectAll("myCircles")
       .data(data)
       .enter()
       .append("circle")
