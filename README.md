@@ -1,9 +1,9 @@
-# voting rates
+# README
 
-| Title | voting-rates |
+| Title | Berkeley applications |
 |-|-|
-| Developers    | [Alex Zhao](mailto:axyzhao@berkeley.edu) |
-| Link | [http://projects.dailycal.org/voting](http://projects.dailycal.org/voting) |
+| Developers    | [Vyoma Raman]|
+| Link | [http://projects.dailycal.org/applications](http://projects.dailycal.org/applications) |
 
 
 ©2020 The Daily Californian

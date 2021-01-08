@@ -6,7 +6,7 @@
 <div id="sg2">
   <h3 id="heads"></h3>
   <div>
-    <select class="sel" id="selStatus" onchange="changeStream()">
+    <select class="sel" id="selStatus1" onchange="changeStream1()">
       <option value = "all">All Students</option>
       <option value = "fr">New Freshmen</option>
       <option value = "tr">Transfer Students</option>
@@ -35,15 +35,15 @@ var svg3 = d3.select("#sg2")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-function changeStream() {
+function changeStream1() {
   svg3.selectAll("*").remove();
-  addHeading();
-  addData();
+  addHeading1();
+  addData1();
 }
 
-function addHeading() {
+function addHeading1() {
   noun = ""
-  switch(selStatus.value) {
+  switch(selStatus1.value) {
     case "all":
       noun = "All Students";
       break;
@@ -57,9 +57,9 @@ function addHeading() {
   heads.innerHTML = "Acceptances, Rejections, and Acceptance Rates for " + noun;
 }
 
-function addData() {
+function addData1() {
 // Parse the Data
-  d3.csv("https://raw.githubusercontent.com/vyoma-raman/my_dc_first_repo/master/data/acc_rej_" + selStatus.value + ".csv", function(data) {
+  d3.csv("https://raw.githubusercontent.com/vyoma-raman/my_dc_first_repo/master/data/acc_rej_" + selStatus1.value + ".csv", function(data) {
 
     // List of groups = header of the csv files
     var keys = data.columns.slice(1)
@@ -133,7 +133,7 @@ function addData() {
         let year = Math.floor(x_stream.invert(d3.mouse(this)[0]));
         let x_coord = d3.event.pageX;
         let noun = ""
-        switch(selStatus.value) {
+        switch(selStatus1.value) {
           case "all":
             noun = "students";
             break;
@@ -188,7 +188,7 @@ function addData() {
         let year = Math.floor(x_stream.invert(d3.mouse(this)[0]));
         let y_coord = d3.event.pageY;
         let noun = "";
-        switch(selStatus.value) {
+        switch(selStatus1.value) {
           case "all":
             noun = "all students";
             break;
@@ -210,6 +210,6 @@ function addData() {
   })
 }
 
-changeStream();
+changeStream1();
 
 </script>

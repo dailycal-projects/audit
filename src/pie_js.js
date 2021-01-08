@@ -1,15 +1,15 @@
-let keys = Object.keys(data["1996-97"])
+let keys = Object.keys(pie_data["1996-97"])
 let keyDict = {"Asian": "Asian", "White": "White", "International": "International", "Chicano_Latino": "Chicanx Latinx", "African_American": "African American", "Decline_to_State": "Unknown", "Native_American_Alaska_Native": "Native American Alaska Native", "Pacific_Islander": "Pacific Islander"}
 
-let selectedCategory = "2019-20"
+let selectedCategory2 = "2019-20"
 
-const select = d3.select('#select-div')
+const select2 = d3.select('#select-div')
 .append('select')
 .attr('id', 'category-select')
 
-select
+select2
   .selectAll('option')
-  .data(Object.keys(data))
+  .data(Object.keys(pie_data))
   .enter()
   .append('option')
   .attr('value', function (d) {
@@ -19,23 +19,21 @@ select
     return d
   })
 
-const svg2 = d3
-  .select('#my_dataviz2')
+const svg6 = d3
+  .select('#my_dataviz4')
 .append("svg")
     .attr("width", width)
     .attr("height", height)
 .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-const tooltip2 = d3.select("#tooltip").append("div")
-  .attr("class", "tooltip");
 
 update()
 
 function update(d, i) {
-  let data2 = data[selectedCategory]
+  let data2 = pie_data[selectedCategory2]
   let pied_data2 = pie(d3.entries(data2))
-  svg2
+  svg6
       .selectAll('all')
       .data(pied_data2)
       .enter()
@@ -65,7 +63,7 @@ function update(d, i) {
 };
 
 select.on("change", function (d) {
-      selectedCategory = d3.select(this).property("value");
-      svg2.selectAll("*").remove();
+      selectedCategory2 = d3.select(this).property("value");
+      svg6.selectAll("*").remove();
       update();
   })

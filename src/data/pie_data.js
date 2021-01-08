@@ -1,4 +1,4 @@
-let data = {
+let pie_data = {
     "2019-20": {
         "Asian": 28942,
         "White": 18026,
