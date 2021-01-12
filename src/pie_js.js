@@ -3,7 +3,7 @@ let keyDict = {"Asian": "Asian", "White": "White", "International": "Internation
 
 let selectedCategory2 = "2019-20"
 
-const select2 = d3.select('#select-div')
+const select2 = d3.select('#select-div2')
 .append('select')
 .attr('id', 'category-select')
 
@@ -28,9 +28,9 @@ const svg6 = d3
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
-update()
+update2()
 
-function update(d, i) {
+function update2(d, i) {
   let data2 = pie_data[selectedCategory2]
   let pied_data2 = pie(d3.entries(data2))
   svg6
@@ -39,8 +39,8 @@ function update(d, i) {
       .enter()
       .append('path')
       .attr('d', d3.arc()
-          .innerRadius(radius * 0.5)
-          .outerRadius(radius)
+          .innerRadius(radius2 * 0.5)
+          .outerRadius(radius2)
       )
       .attr('fill', function(d){ return(color(d.data.key)) })
       .attr("stroke", "black")
@@ -48,22 +48,26 @@ function update(d, i) {
       .on("mouseover", function(d, i) {
           d3.select(this)
               .style("opacity", 0.7)
-          tooltip2.transition()
+          tooltip4.transition()
               .style("opacity", 1)
-          tooltip2.html("<strong>"+ keyDict[keys[i]] + "</strong><br>" + Math.round(data2[keys[i]] / total(data2) * 10000) / 100 + "%")
-              .style("left", (3 * width / 2 + margin1 - 75) + "px")
-              .style("top", (height / 2 + 18) + "px")
+          tooltip4.html("<strong>"+ keyDict[keys[i]] + "</strong><br>" + Math.round(data2[keys[i]] / total(data2) * 10000) / 100 + "%")
+              .style("left", d3.event.pageX + "px")
+              .style("top", d3.event.pageY + "px")
+                    .style("text-align", "center")
+                    .style("width", "150px")
+                    .style("height", "80px")
+                    .style("border", "0px")
         })
       .on("mouseout", function(d) {
           d3.select(this)
               .style("opacity", 1)
-          tooltip2.transition()
+          tooltip4.transition()
               .style("opacity", 0)
           })
 };
 
-select.on("change", function (d) {
+select2.on("change", function (d) {
       selectedCategory2 = d3.select(this).property("value");
       svg6.selectAll("*").remove();
-      update();
+      update2();
   })

@@ -5,7 +5,7 @@
         <script src="https://d3js.org/d3.v4.js"></script>
     </head>
     <body>
-    <div id="select-div" class="sel4"></div>
+    <div id="select-div2" class="sel4"></div>
         <div id="two_divs" style="display: flex;">
             <div id="my_dataviz3" style="width: 420px;"></div>
             <div id="my_dataviz4" style="flex-grow: 1;"></div>
@@ -47,6 +47,9 @@
         var tooltip3 = d3.select("#my_dataviz3").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
+        var tooltip4 = d3.select("#my_dataviz4").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         svg7
@@ -72,6 +75,7 @@
                     .style("top", d3.event.pageY + "px")
                     .style("text-align", "center")
                     .style("width", "150px")
+                    .style("height", "80px")
                     .style("border", "0px")
               })
             .on("mouseout", function(d) {

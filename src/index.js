@@ -8,6 +8,7 @@ const gap = 6;
 
 const noOfDots = 100
 margin.top = 0
+margin.right=100;
 margin.bottom=0
 
 let selectedCategory = "First-Generation"
@@ -102,7 +103,7 @@ var title = g.append("g")
     .enter()
     .append("g")
     .attr("transform", function(d) {
-        return  "translate(" + width/2 + "," + 250 + ")";
+        return  "translate(" + (width/2 - 45) + "," + 250 + ")";
     })
 
 
