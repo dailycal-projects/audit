@@ -6,25 +6,25 @@
   "timestamp": "2020-10-25T08:13-0400",
   "dateline": "10/25/20 08:13 PM EDT",
   "header": {
-    "headline": "Audit explanation",
-    "subhed": "Admissions and applications",
+    "headline": "Admissions audit explained",
+    "subhed": "Diversity and privilege in UC Berkeley undergraduate admissions",
     "byline": "Vyoma Raman, Kaylei Nilson-Pierce, Yasmin Gehman",
     "byline_link": "https://www.dailycal.org/author/vraman"
   },
   "share": {
     "fbook": {
-      "card_title": "Audit",
-      "card_description": "Comparing voting rates",
+      "card_title": "Admissions audit explained",
+      "card_description": "Diversity and privilege in UC Berkeley undergraduate admissions",
       "author": "dailycal"
     },
     "twitter": {
-      "card_title": "Who votes at UC Berkeley?",
-      "card_description": "Comparing voting rates",
-      "share_tweet": "Comparing voting rates",
+      "card_title": "Admissions audit explained",
+      "card_description": "Diversity and privilege in UC Berkeley undergraduate admissions",
+      "share_tweet": "Diversity and privilege in UC Berkeley undergraduate admissions",
       "author": "@dailycal"
     },
     "image": {
-      "url": "http://projects.dailycal.org/2020/voting/images/voted.JPG",
+      "url": "https://www.dailycal.org/assets/uploads/2020/09/rankings_Ruby-Sapia_staff.jpg",
       "alt": "<Text>",
       "type": "image/jpeg",
       "width": "600",
