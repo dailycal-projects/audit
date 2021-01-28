@@ -381,6 +381,7 @@ function update2(d, i) {
       .on("mouseover", function(d, i) {
           d3.select(this)
               .style("opacity", 0.7)
+         tool_width = 150
           tooltip4.transition()
               .style("opacity", 1)
           tooltip4.html("<strong>"+ keyDict[keys[i]] + "</strong><br>" + Math.round(data2[keys[i]] / total(data2) * 10000) / 100 + "%")

@@ -18,9 +18,9 @@
 // set the dimensions and margins of the graph
 let pageWidth = window.innerWidth;
 
-var margin = {top: 155, right: 50, bottom: 30, left: 50},
+var margin = {top: 150, right: 50, bottom: 50, left: 50},
     width_sg = 600;
-    height = 600 - margin.top - margin.bottom;
+    height = 800 - margin.top - margin.bottom;
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -146,7 +146,7 @@ function addData1() {
         }
         tooltip1.html("<strong>" + year + "-" + (year + 1) + "</strong><br>" + numberWithCommas(d[year - 1996]['data'][keys[i]]) + " " + noun + " were " + keys[i].toLowerCase() + ".")
           .style("left", ((x_coord <= (pageWidth / 4 + 125)) ? (pageWidth / 4) : ((x_coord >= (pageWidth * 3 / 4 - 125)) ? (pageWidth * 3 / 4 - 250) : (x_coord - 125))) + "px")
-          .style("top", (margin.top - 55) + "px")
+          .style("top", (d3.event.pageY) + "px")
 
       })
 
@@ -201,11 +201,10 @@ function addData1() {
         }
         tooltip2.html("<strong>" + year + "-" + (year + 1) + "</strong><br>" + "Acceptance rate for<br>" + noun + ": " + d.AcceptanceRate + "%")
           .style("left", (d3.event.pageX - 75) + "px")
-          .style("top", (d3.event.pageY - 75) + "px")
+          .style("top", d3.event.pageY + "px")
           .style("width", "auto")
           .style("background-color", "#1F1F1F")
           .style("color", "white")
-
       })
   })
 }

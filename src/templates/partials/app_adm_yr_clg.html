@@ -24,7 +24,7 @@ selStatus.value = "all"
 
 var margin = {top: 155, right: 50, bottom: 30, left: 50},
     width_sg2 = 600;
-    height = 600 - margin.top - margin.bottom;
+    height = 800 - margin.top - margin.bottom;
 
 // append the svg4 object to the body of the page
 var svg4 = d3.select("#sg1")
@@ -179,7 +179,7 @@ function addData() {
         let x_coord = d3.event.pageX;
         tooltip.html("<strong>" + year + "-" + (year + 1) + "</strong><br>The " + keyDict[keys[i]] + " " + verb + " " + numberWithCommas(d[year - 1996]['data'][keys[i]]) + " " + end)
           .style("left", ((x_coord <= (pageWidth / 4 + 125)) ? (pageWidth / 4) : ((x_coord >= (pageWidth * 3 / 4 - 125)) ? (pageWidth * 3 / 4 - 250) : (x_coord - 125))) + "px")
-          .style("top", (margin.top - 55) + "px")
+          .style("top", (d3.event.pageY) + "px")
           .style("width", "250px")
       })
   })
