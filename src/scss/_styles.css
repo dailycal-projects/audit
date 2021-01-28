@@ -15,11 +15,12 @@
   border: 1px gray solid;
   border-radius: 10px;
   opacity: 0;
-  font-family: Arial;
+  font-family: "benton-sans";
 }
 
 g {
   font-size: 15px;
+  font-family: "benton-sans";
 }
 
 .select-items div,.select-selected {
