@@ -174,6 +174,38 @@ forked from http://blockbuilder.org/tomshanley/a94a879c8d28e302ac2b89228f9bd1f7
 by Tom Shanley
 */
 
+function wrap(text, width) {
+    text.each(function () {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            x = text.attr("x"),
+            y = text.attr("y"),
+            dy = 0, //parseFloat(text.attr("dy")),
+            tspan = text.text(null)
+                        .append("tspan")
+                        .attr("x", x)
+                        .attr("y", y)
+                        .attr("dy", dy + "em");
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan")
+                            .attr("x", x)
+                            .attr("y", y)
+                            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                            .text(word);
+            }
+        }
+    });
+}
 const radius = 7;
 const gap = 6;
 
@@ -288,6 +320,7 @@ title.append("text")
         let index = d.values.findIndex(findCategory)
         return d.values[index].header
     })
+  .call(wrap, 500);
 
 var labels = g.append("g")
     .attr("class", "labels")
@@ -296,7 +329,7 @@ var labels = g.append("g")
     .enter()
     .append("g")
     .attr("transform", function(d) {
-        return  "translate(" + xScale(d.key) + "," + 70 + ")";
+        return  "translate(" + xScale(d.key) + "," + 90 + ")";
     })
 
 
@@ -352,10 +385,22 @@ function update() {
 
 //remove title
 
-  title.selectAll(".title")
-  .style("opacity", 0)
+  d3.selectAll(".title").remove()
+  //title.selectAll(".title")
+  //.style("opacity", 0)
 
 //fade in title and update text - synchronize with the appearance of the dots, which have a delay specified.
+
+var title = g.append("g")
+    .attr("class", "title")
+    .selectAll("text")
+    .data(nestByPosition)
+    .enter()
+    .append("g")
+    .attr("transform", function(d) {
+        return  "translate(" + (width/2 - 45) + "," + 250 + ")";
+    })
+
 
   title.selectAll(".title").transition()
   .duration(2000)
@@ -363,10 +408,18 @@ function update() {
     return i * 5
   })
   .style("opacity", 1)
+
+title.append("text")
+    .attr("class", "title")
+    .attr("x", -200)
+    .attr("y", -220)
+  .attr("font-family", "benton-sans")
+    .style("fill", "#00B0DA")
   .text(function(d){
         let index = d.values.findIndex(findCategory)
         return d.values[index].header
     })
+  .call(wrap, 500);
 
   labels.selectAll(".label-subcategory")
   .style("opacity", 0)

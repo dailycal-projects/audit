@@ -138,83 +138,6 @@ h4 {
   }
 }
 
-@media screen and (max-width: 400px) {
-  #stacked_bar {
-  svg {
-    zoom: 0.33;
-  }
-  }
-}
-
-@media screen and (max-width: 980px) {
-  #line_stops {
-  svg {
-    zoom: 0.9;
-  }
-  }
-}
-
-@media screen and (max-width: 980px) {
-  #line_search {
-  svg {
-    zoom: 0.9;
-  }
-  }
-}
-@media screen and (max-width: 900px) {
-  #line_stops {
-  svg {
-    zoom: 0.7;
-  }
-  }
-}
-
-@media screen and (max-width: 900px) {
-  #line_search {
-  svg {
-    zoom: 0.7;
-  }
-  }
-}
-
-@media screen and (max-width: 700px) {
-  #line_stops {
-  svg {
-    zoom: 0.5;
-  }
-  }
-}
-
-@media screen and (max-width: 700px) {
-  #line_search {
-  svg {
-    zoom: 0.5;
-  }
-  }
-}
-
-@media screen and (max-width: 400px) {
-  #line_stops {
-  svg {
-    zoom: 0.32;
-  }
-  }
-}
-
-@media screen and (max-width: 400px) {
-  #line_search {
-  svg {
-    zoom: 0.32;
-  }
-  }
-}
-//@media screen and (max-width: 1500px) {
-  //#stacked_bar {
-     //svg {
-       //zoom: 0.8;
-     //}
-  //}
-//}
   .axis path,
   .axis line {
     fill: none;
@@ -226,3 +149,30 @@ h4 {
   .y .tick line {
     stroke: #ddd;
   }
+
+  text {
+    font-size: 22px;
+  }
+
+  .title {
+    font-size: 22px;
+    }
+
+  .label.label-subcategory {
+    font-size: 18px;
+  }
+  .label.label-percentage {
+    font-size: 18px;
+  }
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 28px;
+    }
+  .label.label-subcategory {
+    font-size: 26px;
+  }
+  .label.label-percentage {
+    font-size: 26px;
+  }
+  }
+
