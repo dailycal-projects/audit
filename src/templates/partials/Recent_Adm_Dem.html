@@ -332,7 +332,7 @@ let pie_data = {
     </script> 
     <script>
 let keys = Object.keys(pie_data["1996-97"])
-let keyDict = {"Asian": "Asian", "White": "White", "International": "International", "Chicano_Latino": "Chicanx Latinx", "African_American": "African American", "Decline_to_State": "Unknown", "Native_American_Alaska_Native": "Native American Alaska Native", "Pacific_Islander": "Pacific Islander"}
+let keyDict = {"Asian": "Asian", "White": "White", "International": "International", "Chicano_Latino": "Chicano/Latino", "African_American": "African American", "Decline_to_State": "Unknown", "Native_American_Alaska_Native": "Native American/Alaska Native", "Pacific_Islander": "Pacific Islander"}
 
 let selectedCategory2 = "2019-20"
 
@@ -389,7 +389,7 @@ function update2(d, i) {
               .style("top", d3.event.pageY + "px")
                     .style("text-align", "center")
                     .style("width", "150px")
-                    .style("height", "80px")
+                    .style("height", function(d) { if (keys[i] == "Native_American_Alaska_Native") { return "120px"} else { return "80px" } })
                     .style("border", "0px")
         })
       .on("mouseout", function(d) {
